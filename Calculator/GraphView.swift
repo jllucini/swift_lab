@@ -17,7 +17,7 @@ class GraphView: UIView {
 
 //    required init(coder aDecoder: NSCoder) {
 //        super.init(coder: aDecoder)
-        //axOrigin =  convertPoint(center, fromView: superview)
+//        axOrigin =  convertPoint(center, fromView: superview)
 //    }
     
     @IBInspectable
@@ -47,7 +47,8 @@ class GraphView: UIView {
     
     private var axMinX : CGFloat {
         var xMax: CGFloat = bounds.maxX-axOrigin.x
-        return CGFloat((xMax-bounds.maxX)/axPPUnit)
+        //return CGFloat((xMax-bounds.maxX)/axPPUnit)
+        return CGFloat(-axOrigin.x/axPPUnit)
     }
     
     private var axMaxX: CGFloat {
@@ -73,24 +74,24 @@ class GraphView: UIView {
         
         if let gvDS = dataSource {
             var oXi:CGFloat = CGFloat(axMinX)
-            var oY0 = gvDS.oneVarFunction(Double(oXi))
+            var oY0: Double? = gvDS.oneVarFunction(Double(oXi))
             oXi += xIncr
             while oXi < CGFloat(axMaxX) {
                 if let oY1: Double = gvDS.oneVarFunction(Double(oXi)){
-                    path.moveToPoint(   transform( CGPoint(x: CGFloat(oXi-xIncr), y: CGFloat(oY0!)) ))
-                    path.addLineToPoint(transform( CGPoint(x: CGFloat(oXi), y: CGFloat(oY1)) ))
+                    if  oY0 != nil{
+                        path.moveToPoint(   transform( CGPoint(x: CGFloat(oXi-xIncr), y: CGFloat(oY0!)) ))
+                        path.addLineToPoint(transform( CGPoint(x: CGFloat(oXi), y: CGFloat(oY1)) ))
+                    }
                     oY0 = oY1
                 }
                 oXi += xIncr
             }
         }
         path.stroke()
+    }
 
-/*        var faceR: CGFloat = min(bounds.size.width, bounds.size.height)/2
-        let facePath = UIBezierPath(arcCenter: axOrigin, radius: faceR, startAngle: 0, endAngle: CGFloat(2*M_PI), clockwise: true)
-        UIColor.blackColor().setStroke()
-        facePath.stroke()
-*/
+    func resetOrigin (origin: CGPoint ){
+        axOrigin = origin
     }
     
     func moveOrigin (translation: CGPoint ){
@@ -101,8 +102,8 @@ class GraphView: UIView {
     private func transform(point: CGPoint) -> CGPoint {
         var result = point
         
-        result.x = (result.x*axPPUnit + axOrigin.x);
-        result.y = (result.y*axPPUnit + axOrigin.y);
+        result.x = (axOrigin.x + result.x*axPPUnit);
+        result.y = (axOrigin.y - result.y*axPPUnit);
         
         return result
     }

@@ -20,6 +20,13 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         static let MoveOriginScale: CGFloat = 4
     }
     
+    override func viewDidAppear(bool: Bool) {
+        super.viewDidAppear(bool)
+        
+        // Do any additional setup after loading the view.
+        graphView.resetOrigin(CGPoint(x: graphView.bounds.midX, y: graphView.bounds.midY))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,22 +42,15 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     func updateUI (){
         graphView.setNeedsDisplay()
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
+    //
+    var graphFunctDS: FunctionDataSource?
     
     func oneVarFunction(gvValue: Double) -> Double?{
         var result: Double? = nil
         
-        if cos(gvValue).isFinite {
-            result = (cos(gvValue))
+        if let gfDS = graphFunctDS{
+            result = gfDS.graphFunction(gvValue)
         }
         
         return result

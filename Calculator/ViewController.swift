@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol FunctionDataSource: class {
+    func graphFunction(gvValue: Double) -> Double?
+}
+
+class ViewController: UIViewController, FunctionDataSource {
 
 
     override func viewDidLoad() {
@@ -143,6 +147,32 @@ class ViewController: UIViewController {
         calculatorBrain.reset()
         history.text = " "
         display.text = "0"
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "ShowGraph":
+                if let vc = segue.destinationViewController as? GraphViewController{
+                    vc.graphFunctDS = self
+            }
+            default: break
+            }
+        }
+    }
+    
+    func graphFunction(inpValue: Double) -> Double?{
+        self.calculatorBrain.variableValues["M"] = inpValue
+        if let aux = self.calculatorBrain.evaluate(){
+            if aux.isFinite {
+                return aux
+            } else {
+                return nil
+            }
+        } else {
+            return nil
+        }
     }
     
 }

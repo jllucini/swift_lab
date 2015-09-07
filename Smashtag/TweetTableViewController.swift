@@ -16,6 +16,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     // The API
     var searchText: String? = "#stanford" {
         didSet {
+            lastSuccessfulRequest = nil
             searchTextField?.text = searchText
             tweets.removeAll()
             tableView.reloadData()
@@ -27,6 +28,8 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.estimatedRowHeight = tableView.rowHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
         refresh()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -35,21 +38,49 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
     
-    func refresh(){
-        if searchText != nil{
-            let request = TwitterRequest(search: searchText!, count: 100)
-            request.fetchTweets() { (newTweets) -> Void in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if newTweets.count > 0 {
-                        self.tweets.insert(newTweets, atIndex: 0)
-                        self.tableView.reloadData()
-                    }
-                })
+    var lastSuccessfulRequest: TwitterRequest?
+    
+    var nextRequestToAttempt: TwitterRequest? {
+        if lastSuccessfulRequest == nil{
+            if searchText != nil{
+                return TwitterRequest(search: searchText!, count: 100)
+            } else {
+                return nil
             }
+        } else {
+            return lastSuccessfulRequest!.requestForNewer
         }
     }
     
+    func refresh(){
+        if refreshControl != nil{
+            refreshControl!.beginRefreshing()
+        }
+        refreshSpinner(refreshControl)
+    }
+    
     // MARK: - UITextField Delegate
+    
+
+    @IBAction func refreshSpinner(sender: UIRefreshControl?) {
+        if searchText != nil{
+            //let request = TwitterRequest(search: searchText!, count: 100)
+            if let request = nextRequestToAttempt {
+                request.fetchTweets() { (newTweets) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if newTweets.count > 0 {
+                            self.lastSuccessfulRequest = request
+                            self.tweets.insert(newTweets, atIndex: 0)
+                            self.tableView.reloadData()
+                            sender!.endRefreshing()
+                        }
+                    })
+                }
+            }
+        } else {
+            sender?.endRefreshing()
+        }
+    }
     
     @IBOutlet weak var searchTextField: UITextField! {
         didSet {

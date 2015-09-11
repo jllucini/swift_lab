@@ -28,9 +28,10 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.estimatedRowHeight = tableView.rowHeight
+        //self.tableView.estimatedRowHeight = tableView.rowHeight
         tableView.rowHeight = UITableViewAutomaticDimension
         refresh()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -115,12 +116,14 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(Storyboard.CellReuseIdentifier, forIndexPath: indexPath) as TweetTableViewCell
 
-        // Configure the cell...
         cell.tweet = tweets[indexPath.section][indexPath.row]
 
         return cell
     }
 
+    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 500.0
+    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -157,14 +160,20 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     }
     */
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
+        if segue.identifier == "ShowMentions"{
+            let ttve = sender as? TweetTableViewCell
+            let mentionsAdapter = MentionsAdapter(aTweet: ttve!.tweet)
+            let nav = segue.destinationViewController as UINavigationController
+            let mvc = nav.topViewController as MentionsTableViewController
+            mvc.mentionsAdapter = mentionsAdapter
+        }
     }
-    */
 
 }

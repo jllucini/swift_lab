@@ -93,6 +93,10 @@ class MentionsTableViewController: UITableViewController {
             if let label = hashCell?.labelData {
                 ttvc.searchText = label.hasPrefix("#") ? label : "#\(label)"
             }
+        } else if segue.identifier == "ShowImageDetail" {
+            let nav = segue.destinationViewController as UINavigationController
+            let ivc = nav.topViewController as ImageViewController
+            ivc.mediaItem = mentionsAdapter?.tweet?.media[0]
         }
     }
     

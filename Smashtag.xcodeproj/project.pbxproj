@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		884D67471BA4B1AE000468ED /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884D67461BA4B1AE000468ED /* ImageViewController.swift */; };
 		886B78171B9E20AA00BA20F7 /* TweetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B78161B9E20AA00BA20F7 /* TweetTableViewCell.swift */; };
 		886B78191BA0A0C100BA20F7 /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B78181BA0A0C100BA20F7 /* MentionsTableViewController.swift */; };
 		886B781B1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B781A1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		884D67461BA4B1AE000468ED /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		886B78161B9E20AA00BA20F7 /* TweetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetTableViewCell.swift; sourceTree = "<group>"; };
 		886B78181BA0A0C100BA20F7 /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
 		886B781A1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProtoTableViewCell.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				88E8E0EE1B9E05AC003FFE92 /* Twitter */,
 				88E8E0CE1B9E01F1003FFE92 /* ViewController.swift */,
 				88E8E0D01B9E01F1003FFE92 /* Main.storyboard */,
+				884D67461BA4B1AE000468ED /* ImageViewController.swift */,
 				886B781C1BA0A54500BA20F7 /* HashProtoTableViewCell.swift */,
 				886B781A1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift */,
 				886B78181BA0A0C100BA20F7 /* MentionsTableViewController.swift */,
@@ -256,6 +259,7 @@
 				88E8E0CF1B9E01F1003FFE92 /* ViewController.swift in Sources */,
 				88E8E0CD1B9E01F1003FFE92 /* AppDelegate.swift in Sources */,
 				886B78191BA0A0C100BA20F7 /* MentionsTableViewController.swift in Sources */,
+				884D67471BA4B1AE000468ED /* ImageViewController.swift in Sources */,
 				886B781B1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift in Sources */,
 				886B781D1BA0A54500BA20F7 /* HashProtoTableViewCell.swift in Sources */,
 				88E8E0F51B9E05AC003FFE92 /* TwitterRequest.swift in Sources */,

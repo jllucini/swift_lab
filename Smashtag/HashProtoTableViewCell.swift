@@ -18,9 +18,32 @@ class HashProtoTableViewCell: UITableViewCell {
         }
     }
     
+    var labelType: TweetSection? {
+        didSet{
+            if labelType == TweetSection.URLs {
+                updateUI()
+            }
+        }
+    }
+    
     func updateUI(){
         if hashLabel != nil { // blocks main thread!
+            if labelType == TweetSection.URLs {
+                hashLabel.accessibilityTraits = UIAccessibilityTraitLink
+                var tap = UITapGestureRecognizer(target: self, action: "labelTapped:")
+                tap.numberOfTapsRequired = 1
+                hashLabel.addGestureRecognizer(tap)
+            }
             hashLabel.text = labelData
         }
     }
+    
+    func labelTapped(sender: UITapGestureRecognizer){
+        println("Info \(sender)")
+        if labelType == TweetSection.URLs {
+            let theURL = NSURL(string: labelData!)
+            UIApplication.sharedApplication().openURL(theURL!)
+        }
+    }
+
 }

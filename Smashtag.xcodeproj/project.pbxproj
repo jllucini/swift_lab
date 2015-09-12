@@ -11,6 +11,7 @@
 		886B78191BA0A0C100BA20F7 /* MentionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B78181BA0A0C100BA20F7 /* MentionsTableViewController.swift */; };
 		886B781B1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B781A1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift */; };
 		886B781D1BA0A54500BA20F7 /* HashProtoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886B781C1BA0A54500BA20F7 /* HashProtoTableViewCell.swift */; };
+		887EE7C21BA46F5D00A6CB5F /* MentionsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887EE7C11BA46F5D00A6CB5F /* MentionsAdapter.swift */; };
 		88E8E0CD1B9E01F1003FFE92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E8E0CC1B9E01F1003FFE92 /* AppDelegate.swift */; };
 		88E8E0CF1B9E01F1003FFE92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E8E0CE1B9E01F1003FFE92 /* ViewController.swift */; };
 		88E8E0D21B9E01F1003FFE92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E8E0D01B9E01F1003FFE92 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 		886B78181BA0A0C100BA20F7 /* MentionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsTableViewController.swift; sourceTree = "<group>"; };
 		886B781A1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageProtoTableViewCell.swift; sourceTree = "<group>"; };
 		886B781C1BA0A54500BA20F7 /* HashProtoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashProtoTableViewCell.swift; sourceTree = "<group>"; };
+		887EE7C11BA46F5D00A6CB5F /* MentionsAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionsAdapter.swift; sourceTree = "<group>"; };
 		88E8E0C71B9E01F1003FFE92 /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E8E0CB1B9E01F1003FFE92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88E8E0CC1B9E01F1003FFE92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				886B781C1BA0A54500BA20F7 /* HashProtoTableViewCell.swift */,
 				886B781A1BA0A4EF00BA20F7 /* ImageProtoTableViewCell.swift */,
 				886B78181BA0A0C100BA20F7 /* MentionsTableViewController.swift */,
+				887EE7C11BA46F5D00A6CB5F /* MentionsAdapter.swift */,
 				886B78161B9E20AA00BA20F7 /* TweetTableViewCell.swift */,
 				88E8E0EC1B9E033A003FFE92 /* TweetTableViewController.swift */,
 				88E8E0CA1B9E01F1003FFE92 /* Supporting Files */,
@@ -257,6 +260,7 @@
 				886B781D1BA0A54500BA20F7 /* HashProtoTableViewCell.swift in Sources */,
 				88E8E0F51B9E05AC003FFE92 /* TwitterRequest.swift in Sources */,
 				88E8E0F61B9E05AC003FFE92 /* User.swift in Sources */,
+				887EE7C21BA46F5D00A6CB5F /* MentionsAdapter.swift in Sources */,
 				886B78171B9E20AA00BA20F7 /* TweetTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

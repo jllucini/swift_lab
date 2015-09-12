@@ -8,87 +8,7 @@
 
 import UIKit
 
-public enum TweetSection {
-    case HashTags,URLs, Media, Users
-}
 
-public struct MentionsAdapter {
-
-    private var sectionsToSequence = [TweetSection]()
-    
-    private var tweet: Tweet?
-    
-    public init(aTweet: Tweet?) {
-        tweet = aTweet
-        if tweet?.media.count > 0 {
-            sectionsToSequence.append(TweetSection.Media)
-        }
-        
-        if tweet?.hashtags.count > 0 {
-            sectionsToSequence.append(TweetSection.HashTags)
-        }
-        
-        if tweet?.urls.count > 0 {
-            sectionsToSequence.append(TweetSection.URLs)
-        }
-        
-        if tweet?.user != nil {
-            sectionsToSequence.append(TweetSection.Users)
-        }
-    }
-    
-    
-    public var numSections: Int{
-        return sectionsToSequence.count;
-    }
-    
-    public func rowsAt(section: Int) -> Int {
-        var result = 0
-        if section >= 0 {
-            let tweetSection = sectionsToSequence[section]
-            switch tweetSection {
-            case .Media: result = tweet!.media.count
-            case .HashTags: result = tweet!.hashtags.count
-            case .URLs: result = tweet!.urls.count
-            case .Users:
-                if let t = tweet?.user {
-                    result = 1
-                }
-            }
-        }
-        return result
-    }
-    
-    public func labelAt(indexPath: NSIndexPath) -> String? {
-        var result: String?
-        
-        if indexPath.section >= 0 && indexPath.row >= 0 {
-            let tweetSection = sectionsToSequence[indexPath.section]
-            switch tweetSection {
-            case .Media:    result  = "\(tweet!.media[indexPath.row].url.absoluteString)"
-            case .HashTags: result  = "\(tweet!.hashtags[indexPath.row].keyword)"
-            case .URLs:     result  = "\(tweet!.urls[indexPath.row].keyword)"
-            case .Users:    result  = "\(tweet!.user.description)"
-            default: result = nil
-            }
-        }
-        return result
-    }
-    
-    public func headerAt(section: Int) -> String? {
-        var result: String?
-        let tweetSection = sectionsToSequence[section]
-        switch tweetSection{
-            case .Media: result = "Images"
-            case .HashTags: result = "Hashtags"
-            case .URLs: result = "URLs"
-            case .Users: result = "Users"
-            default: result = nil
-        }
-        return result
-    }
-    
-}
 
 class MentionsTableViewController: UITableViewController {
     
@@ -132,13 +52,13 @@ class MentionsTableViewController: UITableViewController {
                 auxcell.mediaItem = mediaItem
             }
             cell = auxcell
-            //return auxcell
         } else {
             var auxcell = tableView.dequeueReusableCellWithIdentifier("HashProtoCell", forIndexPath: indexPath) as HashProtoTableViewCell
-            var labelData = mentionsAdapter!.labelAt(indexPath)
+            var labelData   = mentionsAdapter!.labelAt(indexPath)
+            let sectionType = mentionsAdapter!.sectionAt(indexPath)
             auxcell.labelData = labelData
+            auxcell.labelType = sectionType
             cell = auxcell
-            //return auxcell
         }
         
         return cell
@@ -156,21 +76,38 @@ class MentionsTableViewController: UITableViewController {
                 let imgWidth  = tableView.frame.width
                 estimate = imgWidth / CGFloat(mediaItem.aspectRatio)
             }
-
             return estimate
         } else {
             return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }
+
     
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "goBackMain"{
+            let hashCell = sender as? HashProtoTableViewCell
+            var ttvc = segue.destinationViewController as TweetTableViewController
+            if let label = hashCell?.labelData {
+                ttvc.searchText = label.hasPrefix("#") ? label : "#\(label)"
+            }
+        }
     }
-    */
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        var doSegue = true
+        if identifier == "goBackMain"{
+            let hashCell = sender as? HashProtoTableViewCell
+            if let label = hashCell?.labelType {
+                if label == TweetSection.URLs {
+                    doSegue = false
+                }
+            }
+        }
+        
+        return doSegue
+    }
 
 }

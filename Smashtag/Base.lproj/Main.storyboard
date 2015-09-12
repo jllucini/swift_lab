@@ -201,7 +201,7 @@
         <!--Detail Image-->
         <scene sceneID="VWf-Ag-Pn4">
             <objects>
-                <viewController id="IkV-ab-fwA" customClass="ImageViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="IkV-ab-fwA" customClass="ImageViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r32-9o-yQD"/>
                         <viewControllerLayoutGuide type="bottom" id="fOa-V5-gdO"/>
@@ -210,26 +210,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g7L-WU-Hy5">
-                                <rect key="frame" x="16" y="72" width="568" height="520"/>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" translatesAutoresizingMaskIntoConstraints="NO" id="mXc-0p-pzV">
+                                <rect key="frame" x="16" y="64" width="568" height="536"/>
+                                <color key="backgroundColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="g7L-WU-Hy5" firstAttribute="top" secondItem="r32-9o-yQD" secondAttribute="bottom" constant="8" symbolic="YES" id="BN9-sx-pRl"/>
-                            <constraint firstItem="g7L-WU-Hy5" firstAttribute="leading" secondItem="hbi-rN-tvD" secondAttribute="leadingMargin" id="IVS-y8-xOz"/>
-                            <constraint firstItem="g7L-WU-Hy5" firstAttribute="trailing" secondItem="hbi-rN-tvD" secondAttribute="trailingMargin" id="VDE-Us-8mu"/>
-                            <constraint firstItem="fOa-V5-gdO" firstAttribute="top" secondItem="g7L-WU-Hy5" secondAttribute="bottom" constant="8" symbolic="YES" id="kgg-Ir-slR"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="mXc-0p-pzV" secondAttribute="bottom" id="Kc2-7m-6MX"/>
+                            <constraint firstItem="mXc-0p-pzV" firstAttribute="top" secondItem="r32-9o-yQD" secondAttribute="bottom" id="Lkw-2z-Boo"/>
+                            <constraint firstItem="mXc-0p-pzV" firstAttribute="top" secondItem="r32-9o-yQD" secondAttribute="bottom" id="NcA-vt-Bts"/>
+                            <constraint firstItem="mXc-0p-pzV" firstAttribute="centerX" secondItem="hbi-rN-tvD" secondAttribute="centerX" id="TAN-eT-fvl"/>
+                            <constraint firstItem="mXc-0p-pzV" firstAttribute="leading" secondItem="hbi-rN-tvD" secondAttribute="leadingMargin" id="a7l-3g-w9K"/>
+                            <constraint firstItem="mXc-0p-pzV" firstAttribute="trailing" secondItem="hbi-rN-tvD" secondAttribute="trailingMargin" id="aJe-Rq-D5A"/>
+                            <constraint firstItem="mXc-0p-pzV" firstAttribute="leading" secondItem="hbi-rN-tvD" secondAttribute="leadingMargin" id="akD-hM-zel"/>
+                            <constraint firstItem="mXc-0p-pzV" firstAttribute="top" secondItem="r32-9o-yQD" secondAttribute="bottom" id="bPg-u2-AfI"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Lkw-2z-Boo"/>
+                                <exclude reference="TAN-eT-fvl"/>
+                                <exclude reference="a7l-3g-w9K"/>
+                                <exclude reference="bPg-u2-AfI"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Detail Image" id="1Ut-6m-hO9"/>
                     <connections>
-                        <outlet property="imageView" destination="g7L-WU-Hy5" id="xn0-zM-lB2"/>
+                        <outlet property="scrollView" destination="mXc-0p-pzV" id="Xfb-wF-n42"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y0g-lZ-ynb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1345" y="1709"/>
+            <point key="canvasLocation" x="1354" y="1725"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pIt-7X-6Oz">
@@ -271,7 +284,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LeI-FL-U4I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="533" y="1709"/>
+            <point key="canvasLocation" x="533" y="1725"/>
         </scene>
     </scenes>
 </document>

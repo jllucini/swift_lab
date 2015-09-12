@@ -8,28 +8,62 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
+class ImageViewController: UIViewController , UIScrollViewDelegate{
 
-    @IBOutlet weak var imageView: UIImageView!
 
+    private var imageView = UIImageView()
+    
+    private var image: UIImage? {
+        get {
+            return imageView.image
+        }
+        set {
+            imageView.image = newValue
+            imageView.sizeToFit()
+            scrollView?.contentSize = imageView.bounds.size
+        }
+    }
+    
+    @IBOutlet weak var scrollView: UIScrollView!{
+        didSet{
+            scrollView.contentSize = imageView.frame.size
+            scrollView.delegate = self
+            scrollView.minimumZoomScale = 0.5
+            scrollView.maximumZoomScale = 1.0
+        }
+    }
+    
     var mediaItem: MediaItem? {
         didSet{
-            updateUI()
+            image = nil
+            if view.window != nil {
+                fetchImage()
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
-        // Do any additional setup after loading the view.
+        scrollView.addSubview(imageView)
     }
     
-    func updateUI(){
-        if mediaItem != nil {
-            if let imageData = NSData(contentsOfURL: mediaItem!.url) { // blocks main thread!
-                imageView?.image = UIImage(data: imageData)
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if image == nil {
+            fetchImage()
+        }
+    }
+    
+    func fetchImage(){
+        if let url = mediaItem!.url { // blocks main thread!
+            let imageData = NSData(contentsOfURL: url)
+            if imageData != nil {
+                image = UIImage(data: imageData!)
             }
         }
     }
 
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 }

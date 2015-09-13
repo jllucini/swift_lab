@@ -65,7 +65,6 @@ class MentionsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        println("titleForHeaderInSection \(section) - \(mentionsAdapter!.headerAt(section))")
         return mentionsAdapter!.headerAt(section)
     }
     

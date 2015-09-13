@@ -20,8 +20,20 @@ class ImageProtoTableViewCell: UITableViewCell {
     }
     
     func updateUI(){
-        if let imageData = NSData(contentsOfURL: mediaItem!.url) { // blocks main thread!
-            mediaImageView?.image = UIImage(data: imageData)
+        if let url = mediaItem!.url { // blocks main thread!
+            let qos = Int(QOS_CLASS_USER_INTERACTIVE.value)
+            dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                let imageData = NSData(contentsOfURL: self.mediaItem!.url)
+                dispatch_async(dispatch_get_main_queue()) {
+                    if url == self.mediaItem!.url {
+                        if imageData != nil {
+                            self.mediaImageView?.image = UIImage(data: imageData!)
+                        } else {
+                            self.mediaImageView?.image = nil
+                        }
+                    }
+                }
+            }
         }
     }
 

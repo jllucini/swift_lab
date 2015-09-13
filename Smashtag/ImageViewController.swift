@@ -8,6 +8,7 @@
 
 import UIKit
 
+// Important, Remve checkbox "Adjust scroll view insets" from Controller's properties
 class ImageViewController: UIViewController , UIScrollViewDelegate{
 
 
@@ -56,9 +57,18 @@ class ImageViewController: UIViewController , UIScrollViewDelegate{
     
     func fetchImage(){
         if let url = mediaItem!.url { // blocks main thread!
-            let imageData = NSData(contentsOfURL: url)
-            if imageData != nil {
-                image = UIImage(data: imageData!)
+            let qos = Int(QOS_CLASS_USER_INTERACTIVE.value)
+            dispatch_async(dispatch_get_global_queue(qos, 0)) {
+                let imageData = NSData(contentsOfURL: url)
+                dispatch_async(dispatch_get_main_queue()) {
+                    if url == self.mediaItem!.url {
+                        if imageData != nil {
+                            self.image = UIImage(data: imageData!)
+                        } else {
+                            self.image = nil
+                        }
+                    }
+                }
             }
         }
     }

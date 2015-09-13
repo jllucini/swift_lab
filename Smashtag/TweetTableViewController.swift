@@ -21,6 +21,9 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             tweets.removeAll()
             tableView.reloadData()
             refresh()
+            if searchText != nil {
+                storeSearch(searchText!)
+            }
         }
     }
 
@@ -101,7 +104,6 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     // MARK: - UITableViewDataSource
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        println("numberOfSectionsInTableView: \(tweets.count)")
         return tweets.count
     }
 
@@ -145,5 +147,18 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     @IBAction func goBack(segue: UIStoryboardSegue){
         
     }
-
+    
+    private let defaults = NSUserDefaults.standardUserDefaults()
+    
+    func storeSearch(search: String){
+        var array = defaults.objectForKey("SavedArray") as? [String] ?? [String]()
+        let ix = find(array, search)
+        if ix == nil {
+            array.append(search)
+            if array.count > 100 {
+                array.removeLast()
+            }
+            defaults.setObject(array, forKey: "SavedArray")
+        }
+    }
 }

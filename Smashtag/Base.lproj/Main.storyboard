@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="7bJ-8O-Wqz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="NRf-Gr-hXT">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -96,10 +96,58 @@
             </objects>
             <point key="canvasLocation" x="1345" y="216"/>
         </scene>
+        <!--History Table View Controller-->
+        <scene sceneID="lw8-st-4vt">
+            <objects>
+                <tableViewController id="GFZ-Cq-T5H" customClass="HistoryTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BgL-Ok-Lig">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" id="XC8-xk-eel">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XC8-xk-eel" id="Bao-Mx-t7h">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="GFZ-Cq-T5H" id="nl9-L3-i2b"/>
+                            <outlet property="delegate" destination="GFZ-Cq-T5H" id="MHG-uN-5Nh"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="history" id="eHH-at-z3e"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d6h-m9-6AC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="-500"/>
+        </scene>
+        <!--Main Tab Bar Controller-->
+        <scene sceneID="POq-5w-Dxd">
+            <objects>
+                <tabBarController extendedLayoutIncludesOpaqueBars="YES" id="NRf-Gr-hXT" customClass="MainTabBarController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="M7X-yu-ChT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="7bJ-8O-Wqz" kind="relationship" relationship="viewControllers" id="4cS-TL-z94"/>
+                        <segue destination="GFZ-Cq-T5H" kind="relationship" relationship="viewControllers" id="ZVo-RR-w6b"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="222-eq-teZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="533" y="-500"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="TIj-A7-qAA">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7bJ-8O-Wqz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="featured" id="BWG-82-03i"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pGo-d7-Kkn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

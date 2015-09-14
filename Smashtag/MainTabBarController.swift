@@ -8,17 +8,48 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+protocol UserSavedData {
+    
+    func storeSearch(search: String)
+    
+    func retrieveHistory() -> [String]
+    
+}
+
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate, UserSavedData{
    
+    // MARK: - UserSavedData
+    
+    private let defaults = NSUserDefaults.standardUserDefaults()
+    private var history = [String]()
+    
+    func storeSearch(search: String){
+        let ix = find(history, search)
+        if ix == nil {
+            history.append(search)
+            if history.count > 100 {
+                history.removeLast()
+            }
+            defaults.setObject(history, forKey: "SavedArray")
+        }
+    }
+    
+    func retrieveHistory() -> [String] {
+        return history
+    }
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-    }
-    // MARK: - Navigation
-    
-    func tabBarController(tabBarController: UITabBarController,
-        didSelectViewController viewController: UIViewController){
-            println("Tab \(viewController)")
+        self.history = defaults.objectForKey("SavedArray") as? [String] ?? [String]()
+        if let ttvc = self.viewControllers![0].topViewController as? TweetTableViewController {
+            ttvc.userHistory = self
+        }
+        if let htvc = self.viewControllers![1].topViewController as? HistoryTableViewController {
+            htvc.userHistory = self
+        }
     }
     
 }

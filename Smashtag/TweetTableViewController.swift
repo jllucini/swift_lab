@@ -11,6 +11,7 @@ import UIKit
 class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     // The model !
+    var userHistory : UserSavedData?
     var tweets = [[Tweet]]()
     
     // The API
@@ -22,7 +23,7 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
             tableView.reloadData()
             refresh()
             if searchText != nil {
-                storeSearch(searchText!)
+                userHistory?.storeSearch(searchText!)
             }
         }
     }
@@ -146,19 +147,5 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
     
     @IBAction func goBack(segue: UIStoryboardSegue){
         
-    }
-    
-    private let defaults = NSUserDefaults.standardUserDefaults()
-    
-    func storeSearch(search: String){
-        var array = defaults.objectForKey("SavedArray") as? [String] ?? [String]()
-        let ix = find(array, search)
-        if ix == nil {
-            array.append(search)
-            if array.count > 100 {
-                array.removeLast()
-            }
-            defaults.setObject(array, forKey: "SavedArray")
-        }
     }
 }

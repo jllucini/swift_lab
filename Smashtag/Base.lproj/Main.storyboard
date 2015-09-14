@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Tweet Table View Controller-->
+        <!--Hashtags-->
         <scene sceneID="jzh-us-bVb">
             <objects>
                 <tableViewController id="pay-Ea-pn9" customClass="TweetTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
@@ -81,7 +81,7 @@
                             <outlet property="delegate" destination="pay-Ea-pn9" id="gV3-AP-zhc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Qrs-X7-3XT"/>
+                    <navigationItem key="navigationItem" title="Hashtags" id="Qrs-X7-3XT"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="P8w-Dt-bKH">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -96,19 +96,31 @@
             </objects>
             <point key="canvasLocation" x="1345" y="216"/>
         </scene>
-        <!--History Table View Controller-->
+        <!--Recent searches-->
         <scene sceneID="lw8-st-4vt">
             <objects>
-                <tableViewController id="GFZ-Cq-T5H" customClass="HistoryTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Recent searches" id="GFZ-Cq-T5H" customClass="HistoryTableViewController" customModule="Smashtag" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BgL-Ok-Lig">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" id="XC8-xk-eel">
+                            <tableViewCell contentMode="left" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryCell" textLabel="rKC-1X-LSE" style="IBUITableViewCellStyleDefault" id="XC8-xk-eel">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XC8-xk-eel" id="Bao-Mx-t7h">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" tableViewCell="XC8-xk-eel" id="Bao-Mx-t7h">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rKC-1X-LSE">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <gestureRecognizers/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="DjN-9l-uHd" appends="YES" id="YMr-Av-wan"/>
+                                            </connections>
+                                        </label>
+                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -117,11 +129,12 @@
                             <outlet property="delegate" destination="GFZ-Cq-T5H" id="MHG-uN-5Nh"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" systemItem="history" id="eHH-at-z3e"/>
+                    <navigationItem key="navigationItem" title="Recent searches" id="ztB-1w-1qM"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d6h-m9-6AC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="DjN-9l-uHd"/>
             </objects>
-            <point key="canvasLocation" x="1345" y="-500"/>
+            <point key="canvasLocation" x="2158" y="-500"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="POq-5w-Dxd">
@@ -136,7 +149,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="7bJ-8O-Wqz" kind="relationship" relationship="viewControllers" id="4cS-TL-z94"/>
-                        <segue destination="GFZ-Cq-T5H" kind="relationship" relationship="viewControllers" id="ZVo-RR-w6b"/>
+                        <segue destination="lZx-9z-J2u" kind="relationship" relationship="viewControllers" id="ZVo-RR-w6b"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="222-eq-teZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -333,6 +346,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LeI-FL-U4I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="533" y="1725"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="a3V-xq-XOk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lZx-9z-J2u" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="history" id="eHH-at-z3e"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ymX-ti-YsS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GFZ-Cq-T5H" kind="relationship" relationship="rootViewController" id="2TD-oa-1Ls"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mZl-lx-ygz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="-500"/>
         </scene>
     </scenes>
 </document>

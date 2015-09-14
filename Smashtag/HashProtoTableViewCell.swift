@@ -27,10 +27,10 @@ class HashProtoTableViewCell: UITableViewCell {
     }
     
     func updateUI(){
-        if hashLabel != nil { // blocks main thread!
+        if hashLabel != nil {
             if labelType == TweetSection.URLs {
                 hashLabel.accessibilityTraits = UIAccessibilityTraitLink
-                var tap = UITapGestureRecognizer(target: self, action: "labelTapped:")
+                var tap = UITapGestureRecognizer(target: self, action: Selector("labelTapped:"))
                 tap.numberOfTapsRequired = 1
                 hashLabel.addGestureRecognizer(tap)
             }
@@ -39,7 +39,6 @@ class HashProtoTableViewCell: UITableViewCell {
     }
     
     func labelTapped(sender: UITapGestureRecognizer){
-        println("Info \(sender)")
         if labelType == TweetSection.URLs {
             let theURL = NSURL(string: labelData!)
             UIApplication.sharedApplication().openURL(theURL!)

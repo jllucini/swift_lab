@@ -109,7 +109,7 @@ class MentionsTableViewController: UITableViewController {
                 }
             }
         }
-        
+        // Skip segue when clicking over a URL
         return doSegue
     }
 

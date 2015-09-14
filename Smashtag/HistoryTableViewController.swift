@@ -54,14 +54,13 @@ class HistoryTableViewController: UITableViewController {
         tap.numberOfTapsRequired = 1
         cell.addGestureRecognizer(tap)
         // Unselect "User interaction" for Label and ContenView
-        
+        // Otherwise last element in the list is not clickable
         return cell
     }
     
 
     func prevSearchTapped(sender: UITapGestureRecognizer){
         if let cell = sender.view as? UITableViewCell {
-            println("Info \(cell.textLabel?.text)")
             self.navigationController?.tabBarController?.selectedIndex = 0
             let ttvc = self.navigationController?.tabBarController?.viewControllers![0].topViewController as? TweetTableViewController
             ttvc?.searchText = cell.textLabel?.text

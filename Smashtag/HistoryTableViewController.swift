@@ -61,11 +61,10 @@ class HistoryTableViewController: UITableViewController {
 
     func prevSearchTapped(sender: UITapGestureRecognizer){
         if let cell = sender.view as? UITableViewCell {
-            self.navigationController?.tabBarController?.selectedIndex = 0
-            let ttvc = self.navigationController?.tabBarController?.viewControllers![0].topViewController as? TweetTableViewController
-            ttvc?.searchText = cell.textLabel?.text
+            if let uh = userHistory {
+                uh.doSearch(cell.textLabel!.text!)
+            }
         }
-        
     }
 
 }

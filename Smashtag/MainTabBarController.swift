@@ -14,6 +14,8 @@ protocol UserSavedData {
     
     func retrieveHistory() -> [String]
     
+    func doSearch(search: String)
+    
 }
 
 class MainTabBarController: UITabBarController, UITabBarControllerDelegate, UserSavedData{
@@ -36,6 +38,12 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate, User
     
     func retrieveHistory() -> [String] {
         return history
+    }
+    
+    func doSearch(search: String) {
+        self.selectedIndex = 0
+        let ttvc = self.viewControllers![0].topViewController as? TweetTableViewController
+        ttvc?.searchText = search
     }
     
     // MARK: - Lifecycle

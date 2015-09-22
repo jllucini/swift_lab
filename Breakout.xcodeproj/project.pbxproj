@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8821E1DA1BAEC4AB008CA7CD /* BricksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821E1D91BAEC4AB008CA7CD /* BricksView.swift */; };
 		8821E1DC1BAF0B02008CA7CD /* BallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821E1DB1BAF0B02008CA7CD /* BallView.swift */; };
+		8821E1DE1BB1C5DD008CA7CD /* PaddleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8821E1DD1BB1C5DD008CA7CD /* PaddleView.swift */; };
 		884CE0761BADCE44001595E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884CE0751BADCE44001595E3 /* AppDelegate.swift */; };
 		884CE0781BADCE44001595E3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884CE0771BADCE44001595E3 /* ViewController.swift */; };
 		884CE07B1BADCE44001595E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 884CE0791BADCE44001595E3 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 /* Begin PBXFileReference section */
 		8821E1D91BAEC4AB008CA7CD /* BricksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BricksView.swift; sourceTree = "<group>"; };
 		8821E1DB1BAF0B02008CA7CD /* BallView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BallView.swift; sourceTree = "<group>"; };
+		8821E1DD1BB1C5DD008CA7CD /* PaddleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaddleView.swift; sourceTree = "<group>"; };
 		884CE0701BADCE44001595E3 /* Breakout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breakout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		884CE0741BADCE44001595E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		884CE0751BADCE44001595E3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				884CE0771BADCE44001595E3 /* ViewController.swift */,
 				8821E1D91BAEC4AB008CA7CD /* BricksView.swift */,
 				8821E1DB1BAF0B02008CA7CD /* BallView.swift */,
+				8821E1DD1BB1C5DD008CA7CD /* PaddleView.swift */,
 				884CE0791BADCE44001595E3 /* Main.storyboard */,
 				884CE0731BADCE44001595E3 /* Supporting Files */,
 			);
@@ -220,6 +223,7 @@
 			files = (
 				884CE0781BADCE44001595E3 /* ViewController.swift in Sources */,
 				884CE0761BADCE44001595E3 /* AppDelegate.swift in Sources */,
+				8821E1DE1BB1C5DD008CA7CD /* PaddleView.swift in Sources */,
 				8821E1DA1BAEC4AB008CA7CD /* BricksView.swift in Sources */,
 				8821E1DC1BAF0B02008CA7CD /* BallView.swift in Sources */,
 			);

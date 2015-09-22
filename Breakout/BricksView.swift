@@ -26,7 +26,9 @@ class BricksView: UIView {
         static let BrickSize = CGSize(width: DefaultWidth, height:20)
     }
     
-    private var wall = [Brick]()
+    private var wall = [String:Brick]()
+    
+    private var finished = false
     
     var numBricks : Int {
         get {
@@ -36,7 +38,7 @@ class BricksView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.yellowColor().colorWithAlphaComponent(0.0)
+        self.backgroundColor = UIColor.yellowColor().colorWithAlphaComponent(0.5)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -46,12 +48,21 @@ class BricksView: UIView {
     
     override func drawRect(rect: CGRect) {
         UIColor.blackColor().setStroke()
-        UIColor.grayColor().setFill()
-        for brick in wall {
+        var removed = 0;
+        for (_,brick) in wall {
             if brick.status == .Visible {
+                UIColor.grayColor().setFill()
                 brick.path.stroke()
                 brick.path.fill()
+            } else {
+                UIColor.yellowColor().setFill()
+                brick.path.stroke()
+                brick.path.fill()
+                removed++
             }
+        }
+        if removed == wall.count {
+            finished = true
         }
     }
 
@@ -62,10 +73,24 @@ class BricksView: UIView {
             var point = CGPoint(x: x, y: y)
             var rect = CGRect(origin: point, size: Constants.BrickSize)
             var path = UIBezierPath(rect: rect)
-            var brick = Brick(name: "\(ix)", status: BrickStatus.Visible, path: path)
-            wall.append(brick)
+            var name = "\(ix)"
+            var brick = Brick(name: name, status: BrickStatus.Visible, path: path)
+            wall.updateValue(brick, forKey: name)
             collider.addBoundaryWithIdentifier(brick.name, forPath: brick.path)
         }
     }
     
+    func removeBrick(name: String, collider: UICollisionBehavior){
+        var brick = wall[name]
+        if brick != nil && wall.indexForKey(name) != nil {
+            brick?.status = BrickStatus.Invisible
+            wall.updateValue(brick!, forKey: name)
+            collider.removeBoundaryWithIdentifier(name)
+            setNeedsDisplay()
+        }
+    }
+    
+    func gameFinished() -> Bool {
+        return finished
+    }
 }

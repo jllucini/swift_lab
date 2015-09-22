@@ -32,7 +32,6 @@ class BallView: UIView {
         let path = UIBezierPath(ovalInRect: CGRect(origin: CGPoint(x: 0, y: 0), size: ballSize))
         UIColor.brownColor().setFill()
         path.fill()
-        UIColor.whiteColor().setFill()
     }
 
 }

@@ -18,17 +18,35 @@
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B1k-3m-ZPI">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIT-Z2-WJc" customClass="PaddleView" customModule="Breakout" customModuleProvider="target">
+                                        <rect key="frame" x="270" y="531" width="60" height="10"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <gestureRecognizers/>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Tkq-b6-5yP" appends="YES" id="dfl-ef-4iZ"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="gPaddle" destination="DIT-Z2-WJc" id="1sD-8V-2YL"/>
                         <outlet property="gameView" destination="B1k-3m-ZPI" id="Z8j-bU-D5R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Tkq-b6-5yP">
+                    <connections>
+                        <action selector="movePaddle:" destination="BYZ-38-t0r" id="83O-d2-Eaw"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="401" y="337"/>
         </scene>
     </scenes>
 </document>

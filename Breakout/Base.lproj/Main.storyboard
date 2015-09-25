@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,23 +17,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B1k-3m-ZPI">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B1k-3m-ZPI" customClass="BreakoutView" customModule="Breakout" customModuleProvider="target">
+                                <rect key="frame" x="16" y="28" width="568" height="572"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIT-Z2-WJc" customClass="PaddleView" customModule="Breakout" customModuleProvider="target">
-                                        <rect key="frame" x="270" y="531" width="60" height="10"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DIT-Z2-WJc" customClass="PaddleView" customModule="Breakout" customModuleProvider="target">
+                                        <rect key="frame" x="254" y="512" width="60" height="10"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <gestureRecognizers/>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="DIT-Z2-WJc" firstAttribute="top" secondItem="B1k-3m-ZPI" secondAttribute="top" constant="503" id="7Dp-7w-pnM"/>
+                                    <constraint firstItem="DIT-Z2-WJc" firstAttribute="leading" secondItem="B1k-3m-ZPI" secondAttribute="leading" constant="219" id="dPD-DW-Ppy"/>
+                                    <constraint firstAttribute="trailing" secondItem="DIT-Z2-WJc" secondAttribute="trailing" constant="289" id="m5k-qu-0rk"/>
+                                    <constraint firstAttribute="bottom" secondItem="DIT-Z2-WJc" secondAttribute="bottom" constant="47" id="wi2-IT-LeF"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7Dp-7w-pnM"/>
+                                        <exclude reference="dPD-DW-Ppy"/>
+                                        <exclude reference="m5k-qu-0rk"/>
+                                        <exclude reference="wi2-IT-LeF"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="Tkq-b6-5yP" appends="YES" id="dfl-ef-4iZ"/>
                                 </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="B1k-3m-ZPI" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="2dd-b1-6lM"/>
+                            <constraint firstAttribute="bottom" secondItem="B1k-3m-ZPI" secondAttribute="bottom" id="SQK-Wt-13S"/>
+                            <constraint firstItem="B1k-3m-ZPI" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="nYS-Od-QBo"/>
+                            <constraint firstItem="B1k-3m-ZPI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="y0W-8d-bVP"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="gPaddle" destination="DIT-Z2-WJc" id="1sD-8V-2YL"/>

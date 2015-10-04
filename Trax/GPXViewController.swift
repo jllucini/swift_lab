@@ -49,8 +49,6 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
                 self.gpxURL = url
             }
         }
-        
-        gpxURL = NSURL(string: "http://cs193p.stanford.edu/Vacation.gpx") // for demo/debug/testing
     }
     
     // MARK: - View Aux Functions
@@ -67,63 +65,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     }
     
     // MARK: - MKMapViewDelegate
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.AnnotationViewReuseIdentifier)
-        
-        if view == nil {
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Constants.AnnotationViewReuseIdentifier)
-            view.canShowCallout = true
-        } else {
-            view.annotation = annotation
-            view.canShowCallout = true
-        }
-        
-        view.leftCalloutAccessoryView = nil
-        if let waypoint = annotation as? GPX.Waypoint {
-            if waypoint.thumbnailURL != nil {
-                view.leftCalloutAccessoryView = UIImageView(frame: Constants.LeftCalloutFrame)
-                // Don't fetch the image here: Load the image in another delegate 
-                // (mapview:didSelectAnotationView)
-                // In this method we are simly creating the pin and the assocaited callout view.
-            }
-        }
-        
-        return view
-    }
     
-
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
-        if let waypoint = view.annotation as? GPX.Waypoint {
-            if let thumbnailImageView = view.leftCalloutAccessoryView as? UIImageView {
-                if let url = waypoint.thumbnailURL {
-                    let qos = Int(QOS_CLASS_USER_INTERACTIVE.value)
-                    dispatch_async(dispatch_get_global_queue(qos, 0)) {
-                        // Fetch the image async
-                        if let imageData = NSData(contentsOfURL: url) {
-                            // Go back to main queue and set the imageData
-                            dispatch_async(dispatch_get_main_queue()) {
-                                if url == waypoint.thumbnailURL!{
-                                    if let image = UIImage(data: imageData) {
-                                        thumbnailImageView.image = image
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    // MARK: - Constants
-    
-    private struct Constants {
-        static let LeftCalloutFrame = CGRect(x: 0, y: 0, width: 59, height: 59)
-        static let AnnotationViewReuseIdentifier = "waypoint"
-        static let ShowImageSegue = "Show Image"
-        static let EditWaypointSegue = "Edit Waypoint"
-        static let EditWaypointPopoverWidth: CGFloat = 320
-    }
 
 }
 

@@ -10,7 +10,7 @@
 
 import Foundation
 
-class GPX: NSObject, Printable, NSXMLParserDelegate
+class GPX: NSObject, NSXMLParserDelegate
 {
     // MARK: - Public API
 
@@ -26,17 +26,17 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
     
     // MARK: - Public Classes
     
-    class Track: Entry, Printable
+    class Track: Entry
     {
         var fixes = [Waypoint]()
         
         override var description: String {
-            let waypointDescription = "fixes=[\n" + "\n".join(fixes.map { $0.description }) + "\n]"
-            return " ".join([super.description, waypointDescription])
+            let waypointDescription = "fixes=[\n" + fixes.map { $0.description }.joinWithSeparator("\n") + "\n]"
+            return [super.description, waypointDescription].joinWithSeparator(" ")
         }
     }
     
-    class Waypoint: Entry, Printable
+    class Waypoint: Entry
     {
         var latitude: Double
         var longitude: Double
@@ -54,11 +54,11 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
         lazy var date: NSDate? = self.attributes["time"]?.asGpxDate
         
         override var description: String {
-            return " ".join(["lat=\(latitude)", "lon=\(longitude)", super.description])
+            return ["lat=\(latitude)", "lon=\(longitude)", super.description].joinWithSeparator(" ")
         }
     }
     
-    class Entry: NSObject, Printable
+    class Entry: NSObject
     {
         var links = [Link]()
         var attributes = [String:String]()
@@ -72,11 +72,11 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
             var descriptions = [String]()
             if attributes.count > 0 { descriptions.append("attributes=\(attributes)") }
             if links.count > 0 { descriptions.append("links=\(links)") }
-            return " ".join(descriptions)
+            return descriptions.joinWithSeparator(" ")
         }
     }
     
-    class Link: Printable
+    class Link: CustomStringConvertible
     {
         var href: String
         var linkattributes = [String:String]()
@@ -91,7 +91,7 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
             var descriptions = [String]()
             descriptions.append("href=\(href)")
             if linkattributes.count > 0 { descriptions.append("linkattributes=\(linkattributes)") }
-            return "[" + " ".join(descriptions) + "]"
+            return "[" + descriptions.joinWithSeparator(" ") + "]"
         }
     }
 
@@ -102,7 +102,7 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
         if waypoints.count > 0 { descriptions.append("waypoints = \(waypoints)") }
         if tracks.count > 0 { descriptions.append("tracks = \(tracks)") }
         if routes.count > 0 { descriptions.append("routes = \(routes)") }
-        return "\n".join(descriptions)
+        return descriptions.joinWithSeparator("\n")
     }
 
     // MARK: - Private Implementation
@@ -115,7 +115,7 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
         self.completionHandler = completionHandler
     }
     
-    private func complete(#success: Bool) {
+    private func complete(success success: Bool) {
         dispatch_async(dispatch_get_main_queue()) {
             self.completionHandler(success ? self : nil)
         }
@@ -125,7 +125,7 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
     private func succeed() { complete(success: true) }
     
     private func parse() {
-        let qos = Int(QOS_CLASS_USER_INITIATED.value)
+        let qos = Int(QOS_CLASS_USER_INITIATED.rawValue)
         dispatch_async(dispatch_get_global_queue(qos, 0)) {
             if let data = NSData(contentsOfURL: self.url) {
                 let parser = NSXMLParser(data: data)
@@ -140,13 +140,13 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
         }
     }
 
-    func parserDidEndDocument(parser: NSXMLParser!) { succeed() }
-    func parser(parser: NSXMLParser!, parseErrorOccurred parseError: NSError!) { fail() }
-    func parser(parser: NSXMLParser!, validationErrorOccurred validationError: NSError!) { fail() }
+    func parserDidEndDocument(parser: NSXMLParser) { succeed() }
+    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) { fail() }
+    func parser(parser: NSXMLParser, validationErrorOccurred validationError: NSError) { fail() }
     
     private var input = ""
 
-    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
         input += string
     }
     
@@ -154,7 +154,7 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
     private var track: Track?
     private var link: Link?
 
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
         switch elementName {
             case "trkseg":
                 if track == nil { fallthrough }
@@ -165,16 +165,16 @@ class GPX: NSObject, Printable, NSXMLParserDelegate
                 routes.append(Track())
                 track = routes.last
             case "rtept", "trkpt", "wpt":
-                let latitude = (attributeDict["lat"] as NSString).doubleValue
-                let longitude = (attributeDict["lon"] as NSString).doubleValue
+                let latitude =  NSString(string: attributeDict["lat"]!).doubleValue
+                let longitude = NSString(string: attributeDict["lon"]!).doubleValue
                 waypoint = Waypoint(latitude: latitude, longitude: longitude)
             case "link":
-                link = Link(href: attributeDict["href"] as String)
+                link = Link(href: attributeDict["href"]! as String)
             default: break
         }
     }
     
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         switch elementName {
             case "wpt":
                 if waypoint != nil { waypoints.append(waypoint!); waypoint = nil }

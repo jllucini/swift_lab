@@ -71,7 +71,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Constants.ShowImageSegue {
             if let waypoint = (sender as? MKAnnotationView)?.annotation as? GPX.Waypoint {
-                if let ivc = segue.destinationViewController.contentViewController as? ImageViewController {
+                if let ivc = segue.destinationViewController as? ImageViewController {
                     ivc.imageURL = waypoint.imageURL
                     ivc.title    = waypoint.name
                 }
@@ -81,28 +81,28 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     
     
     // MARK: - MKMapViewDelegate
-    func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
         var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.AnnotationViewReuseIdentifier)
         
         if view == nil {
             view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: Constants.AnnotationViewReuseIdentifier)
-            view.canShowCallout = true
+            view!.canShowCallout = true
         } else {
-            view.annotation = annotation
-            view.canShowCallout = true
+            view!.annotation = annotation
+            view!.canShowCallout = true
         }
         
-        view.leftCalloutAccessoryView  = nil
-        view.rightCalloutAccessoryView = nil
+        view!.leftCalloutAccessoryView  = nil
+        view!.rightCalloutAccessoryView = nil
         if let waypoint = annotation as? GPX.Waypoint {
             if waypoint.thumbnailURL != nil {
-                view.leftCalloutAccessoryView = UIImageView(frame: Constants.LeftCalloutFrame)
+                view!.leftCalloutAccessoryView = UIImageView(frame: Constants.LeftCalloutFrame)
                 // Don't fetch the image here: Load the image in another delegate
                 // (mapview:didSelectAnotationView)
                 // In this method we are simly creating the pin and the assocaited callout view.
             }
             if waypoint.imageURL != nil {
-                view.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIButton
+                view!.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIButton
             }
         }
         
@@ -110,11 +110,11 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    func mapView(mapView: MKMapView!, didSelectAnnotationView view: MKAnnotationView!) {
+    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if let waypoint = view.annotation as? GPX.Waypoint {
             if let thumbnailImageView = view.leftCalloutAccessoryView as? UIImageView {
                 if let url = waypoint.thumbnailURL {
-                    let qos = Int(QOS_CLASS_USER_INTERACTIVE.value)
+                    let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
                     dispatch_async(dispatch_get_global_queue(qos, 0)) {
                         // Fetch the image async
                         if let imageData = NSData(contentsOfURL: url) {
@@ -133,7 +133,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         performSegueWithIdentifier(Constants.ShowImageSegue, sender: view)
         // Need to prepareFroSegue
         // Copy from "Cassini" project ImageViewController's class. Also copy the assocaited VC from the Storyboard

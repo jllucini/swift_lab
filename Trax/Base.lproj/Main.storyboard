@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XeS-3d-bO5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XeS-3d-bO5">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -52,19 +53,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQd-ik-VY3">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TQd-ik-VY3">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="568"/>
                                 <subviews>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MrP-2d-uZV">
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MrP-2d-uZV">
                                         <rect key="frame" x="290" y="274" width="20" height="20"/>
                                         <animations/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="MrP-2d-uZV" secondAttribute="trailing" constant="290" id="ZqY-M5-24m"/>
+                                    <constraint firstItem="MrP-2d-uZV" firstAttribute="top" secondItem="TQd-ik-VY3" secondAttribute="top" constant="338" id="hn4-Tw-LiO"/>
+                                    <constraint firstItem="MrP-2d-uZV" firstAttribute="centerX" secondItem="TQd-ik-VY3" secondAttribute="centerX" id="vR7-AT-eab"/>
+                                    <constraint firstAttribute="bottom" secondItem="MrP-2d-uZV" secondAttribute="bottom" constant="210" id="vwU-0Y-X8N"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KRh-9P-0yJ" firstAttribute="top" secondItem="TQd-ik-VY3" secondAttribute="bottom" constant="32" id="8xB-ST-0Rs"/>
+                            <constraint firstAttribute="trailing" secondItem="TQd-ik-VY3" secondAttribute="trailing" id="CO1-qL-Lbp"/>
+                            <constraint firstItem="TQd-ik-VY3" firstAttribute="leading" secondItem="TTf-2W-nZx" secondAttribute="leading" id="k5G-hK-c4S"/>
+                            <constraint firstItem="TQd-ik-VY3" firstAttribute="top" secondItem="TTf-2W-nZx" secondAttribute="top" id="xp1-kl-FeK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="c9P-9e-4b0"/>
                     <connections>

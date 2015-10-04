@@ -16,9 +16,9 @@ extension GPX.Waypoint: MKAnnotation {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
     
-    var title: String! { return name }
+    var title: String? { return name }
     
-    var subtitle: String! { return info }
+    var subtitle: String? { return info }
     
     // MARK: - Links to Images
     

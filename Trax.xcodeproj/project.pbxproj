@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8881D06F1BC1B15200787DDA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881D06E1BC1B15200787DDA /* ImageViewController.swift */; };
 		88E5A77B1BC03CC400B5C911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5A77A1BC03CC400B5C911 /* AppDelegate.swift */; };
 		88E5A77D1BC03CC400B5C911 /* GPXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5A77C1BC03CC400B5C911 /* GPXViewController.swift */; };
 		88E5A7801BC03CC400B5C911 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E5A77E1BC03CC400B5C911 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8881D06E1BC1B15200787DDA /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		88E5A7751BC03CC400B5C911 /* Trax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E5A7791BC03CC400B5C911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88E5A77A1BC03CC400B5C911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		88E5A7781BC03CC400B5C911 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8881D06E1BC1B15200787DDA /* ImageViewController.swift */,
 				88E5A79A1BC0491400B5C911 /* GPX.swift */,
 				88E5A7811BC03CC400B5C911 /* Images.xcassets */,
 				88E5A7831BC03CC400B5C911 /* LaunchScreen.xib */,
@@ -220,6 +223,7 @@
 			files = (
 				88E5A77D1BC03CC400B5C911 /* GPXViewController.swift in Sources */,
 				88E5A79D1BC0570F00B5C911 /* MKGPX.swift in Sources */,
+				8881D06F1BC1B15200787DDA /* ImageViewController.swift in Sources */,
 				88E5A77B1BC03CC400B5C911 /* AppDelegate.swift in Sources */,
 				88E5A79B1BC0491400B5C911 /* GPX.swift in Sources */,
 			);
@@ -415,6 +419,7 @@
 				88E5A7961BC03CC400B5C911 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		88E5A7971BC03CC400B5C911 /* Build configuration list for PBXNativeTarget "TraxTests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +428,7 @@
 				88E5A7991BC03CC400B5C911 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

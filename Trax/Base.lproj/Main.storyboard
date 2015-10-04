@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XeS-3d-bO5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -18,8 +18,10 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="caa-Rl-iBe">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
                             </mapView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="caa-Rl-iBe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="3z2-I4-ybf"/>
@@ -28,12 +30,70 @@
                             <constraint firstItem="caa-Rl-iBe" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="h3j-HU-YLn"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Baj-RG-iMn"/>
                     <connections>
                         <outlet property="mapView" destination="caa-Rl-iBe" id="SkE-ox-Pkd"/>
+                        <segue destination="eKa-hs-QKd" kind="show" identifier="Show Image" id="aoH-l2-ptv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1192" y="337"/>
+        </scene>
+        <!--Image View Controller-->
+        <scene sceneID="1vm-eK-Aeb">
+            <objects>
+                <viewController id="eKa-hs-QKd" customClass="ImageViewController" customModule="Trax" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="EsS-sP-pQP"/>
+                        <viewControllerLayoutGuide type="bottom" id="KRh-9P-0yJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TTf-2W-nZx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQd-ik-VY3">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="568"/>
+                                <subviews>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MrP-2d-uZV">
+                                        <rect key="frame" x="290" y="274" width="20" height="20"/>
+                                        <animations/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <animations/>
+                            </scrollView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="c9P-9e-4b0"/>
+                    <connections>
+                        <outlet property="scrollView" destination="TQd-ik-VY3" id="Tlj-Gv-lss"/>
+                        <outlet property="spinner" destination="MrP-2d-uZV" id="QsE-Zn-IHe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jRk-ai-RND" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1912" y="337"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BFE-gx-sju">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XeS-3d-bO5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4yL-Dj-t6G">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="qmi-Ae-rO6"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8eT-Mw-gdY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="487" y="337"/>
         </scene>
     </scenes>
 </document>

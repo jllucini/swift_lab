@@ -21,7 +21,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    // Public API
+    // MARK: - Public API
     var gpxURL: NSURL? {
         didSet {
             clearWaypoints(); // Clear map
@@ -66,14 +66,30 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
         mapView.showAnnotations(waypoints, animated: true)
     }
     
+    
+    @IBAction func addWaypoint(sender: UILongPressGestureRecognizer) {
+        if sender.state == UIGestureRecognizerState.Began {
+            let coordinate = mapView.convertPoint(sender.locationInView(mapView), toCoordinateFromView: mapView)
+            let waypoint = EditableWaypoint(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            waypoint.name = "Dropped"
+            mapView.addAnnotation(waypoint)
+        }
+    }
+    
     // MARK: - Navigation
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == Constants.ShowImageSegue {
             if let waypoint = (sender as? MKAnnotationView)?.annotation as? GPX.Waypoint {
-                if let ivc = segue.destinationViewController as? ImageViewController {
+                if let ivc = segue.destinationViewController.contentViewController as? ImageViewController {
                     ivc.imageURL = waypoint.imageURL
                     ivc.title    = waypoint.name
+                }
+            }
+        } else if segue.identifier == Constants.EditWaypointSegue {
+            if let waypoint = (sender as? MKAnnotationView)?.annotation as? EditableWaypoint {
+                if let ewvc = segue.destinationViewController.contentViewController as? EditWaypointViewController {
+                    ewvc.waypointToEdit = waypoint
                 }
             }
         }
@@ -81,7 +97,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     
     
     // MARK: - MKMapViewDelegate
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView! {
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.AnnotationViewReuseIdentifier)
         
         if view == nil {
@@ -92,16 +108,19 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
             view!.canShowCallout = true
         }
         
+        view?.draggable = annotation is EditableWaypoint
+        
         view!.leftCalloutAccessoryView  = nil
         view!.rightCalloutAccessoryView = nil
         if let waypoint = annotation as? GPX.Waypoint {
             if waypoint.thumbnailURL != nil {
-                view!.leftCalloutAccessoryView = UIImageView(frame: Constants.LeftCalloutFrame)
+                view!.leftCalloutAccessoryView = UIButton(frame: Constants.LeftCalloutFrame)
                 // Don't fetch the image here: Load the image in another delegate
                 // (mapview:didSelectAnotationView)
                 // In this method we are simly creating the pin and the assocaited callout view.
             }
-            if waypoint.imageURL != nil {
+            if annotation is EditableWaypoint {
+                // Then it's shown the DetailDisclosure and do a modal segue to edit the waypoint info
                 view!.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIButton
             }
         }
@@ -112,7 +131,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if let waypoint = view.annotation as? GPX.Waypoint {
-            if let thumbnailImageView = view.leftCalloutAccessoryView as? UIImageView {
+            if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton {
                 if let url = waypoint.thumbnailURL {
                     let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
                     dispatch_async(dispatch_get_global_queue(qos, 0)) {
@@ -122,7 +141,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
                             dispatch_async(dispatch_get_main_queue()) {
                                 if url == waypoint.thumbnailURL!{
                                     if let image = UIImage(data: imageData) {
-                                        thumbnailImageView.image = image
+                                        thumbnailImageButton.setImage(image, forState: .Normal)
                                     }
                                 }
                             }
@@ -134,11 +153,22 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        performSegueWithIdentifier(Constants.ShowImageSegue, sender: view)
-        // Need to prepareFroSegue
-        // Copy from "Cassini" project ImageViewController's class. Also copy the assocaited VC from the Storyboard
-        // Do segue from GPXViewController to new VC
-        // Also embed in Navigation Controller
+        if (control as? UIButton)?.buttonType == UIButtonType.DetailDisclosure{
+            // Disclosure is clicked.
+            // Create a new MVC to be presented modally
+            // Don't forget to prepareForSegue
+            // Deselect to force reload once edited
+            mapView.deselectAnnotation(view.annotation, animated: false)
+            performSegueWithIdentifier(Constants.EditWaypointSegue, sender: view)
+        } else if let waypoint = view.annotation as? GPX.Waypoint {
+            if waypoint.imageURL != nil {
+                performSegueWithIdentifier(Constants.ShowImageSegue, sender: view)
+                // Need to prepareFroSegue
+                // Copy from "Cassini" project ImageViewController's class. Also copy the assocaited VC from the Storyboard
+                // Do segue from GPXViewController to new VC
+                // Also embed in Navigation Controller
+            }
+        }
     }
     
     // MARK: - Constants
@@ -151,5 +181,17 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
         static let EditWaypointPopoverWidth: CGFloat = 320
     }
     
+}
+
+// MARK: - Convenience Extensions
+
+extension UIViewController {
+    var contentViewController: UIViewController {
+        if let navcon = self as? UINavigationController {
+            return navcon.visibleViewController!
+        } else {
+            return self
+        }
+    }
 }
 

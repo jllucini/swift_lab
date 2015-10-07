@@ -12,7 +12,7 @@
 import UIKit
 import MapKit
 
-class GPXViewController: UIViewController, MKMapViewDelegate {
+class GPXViewController: UIViewController, MKMapViewDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!{
         didSet {
@@ -89,6 +89,18 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
         } else if segue.identifier == Constants.EditWaypointSegue {
             if let waypoint = (sender as? MKAnnotationView)?.annotation as? EditableWaypoint {
                 if let ewvc = segue.destinationViewController.contentViewController as? EditWaypointViewController {
+                    // Specify popover's location (anchor)
+                    if let ppc = ewvc.popoverPresentationController {
+                        let coordPoint = mapView.convertCoordinate(waypoint.coordinate, toPointToView: mapView)
+                        ppc.sourceRect = (sender as! MKAnnotationView).popoverSourceRectForCoordinatePoint(coordPoint)
+                        // Compress the popover butleaving room in width dimension
+                        let minimumSize = ewvc.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
+                        ewvc.preferredContentSize = CGSize(width: Constants.EditWaypointPopoverWidth, height: minimumSize.height)
+                        // Fix for popover's display in iPhone
+                        // i.e. to control adaptation behavior
+                        ppc.delegate = self
+                    }
+                    //
                     ewvc.waypointToEdit = waypoint
                 }
             }
@@ -96,7 +108,7 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
     }
     
     
-    // MARK: - MKMapViewDelegate
+    // MARK: - Delegates
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         var view = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.AnnotationViewReuseIdentifier)
         
@@ -171,6 +183,23 @@ class GPXViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // Fix for popover's display in iPhone
+    // 1. To control adaptation behavior
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.OverFullScreen
+    }
+    
+    // Fix for popover's display in iPhone
+    // 2. Return a navigation controller
+    // 3. Fix the transparent background adding visual effects
+    func presentationController(controller: UIPresentationController, viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
+        let navcon = UINavigationController(rootViewController: controller.presentedViewController)
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .ExtraLight))
+        visualEffectView.frame = navcon.view.bounds
+        navcon.view.insertSubview(visualEffectView, atIndex: 0) // "back-most" subview
+        return navcon
+    }
+    
     // MARK: - Constants
     
     private struct Constants {
@@ -192,6 +221,15 @@ extension UIViewController {
         } else {
             return self
         }
+    }
+}
+
+extension MKAnnotationView {
+    func popoverSourceRectForCoordinatePoint(coordinatePoint: CGPoint) -> CGRect {
+        var popoverSourceRectCenter = coordinatePoint
+        popoverSourceRectCenter.x -= frame.width / 2 - centerOffset.x - calloutOffset.x
+        popoverSourceRectCenter.y -= frame.height / 2 - centerOffset.y - calloutOffset.y
+        return CGRect(origin: popoverSourceRectCenter, size: frame.size)
     }
 }
 

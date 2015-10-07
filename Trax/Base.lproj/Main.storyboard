@@ -46,7 +46,6 @@
                             </label>
                         </subviews>
                         <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="nYc-Wa-oab" firstAttribute="leading" secondItem="VJJ-n7-YXa" secondAttribute="trailing" constant="8" symbolic="YES" id="8Bd-oH-BOJ"/>
                             <constraint firstItem="SC2-p6-Mit" firstAttribute="leading" secondItem="nYc-Wa-oab" secondAttribute="leading" id="8Nz-5u-qGC"/>
@@ -65,9 +64,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Waypoint" id="MOZ-tK-rKG">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="gp5-mt-aSL">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="HWV-og-aEA">
                             <connections>
-                                <action selector="done:" destination="yYC-0X-yGw" id="E12-O1-Rt7"/>
+                                <action selector="done:" destination="yYC-0X-yGw" id="Ae5-v0-YJg"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -78,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mhl-hz-qRI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2724" y="-367"/>
+            <point key="canvasLocation" x="1912" y="-345"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -114,7 +113,9 @@
                     <connections>
                         <outlet property="mapView" destination="caa-Rl-iBe" id="SkE-ox-Pkd"/>
                         <segue destination="eKa-hs-QKd" kind="show" identifier="Show Image" id="aoH-l2-ptv"/>
-                        <segue destination="xkF-nN-Haf" kind="presentation" identifier="Edit Waypoint" id="hmG-2o-xeq"/>
+                        <segue destination="yYC-0X-yGw" kind="popoverPresentation" identifier="Edit Waypoint" popoverAnchorView="caa-Rl-iBe" id="iPF-4d-1QL">
+                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                        </segue>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -218,7 +219,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7W0-LL-3g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1912" y="-367"/>
+            <point key="canvasLocation" x="1192" y="-345"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="NCx-PQ-Hb1"/>
+    </inferredMetricsTieBreakers>
 </document>

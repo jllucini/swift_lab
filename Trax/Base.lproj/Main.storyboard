@@ -18,27 +18,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nYc-Wa-oab">
-                                <rect key="frame" x="73" y="28" width="507" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nYc-Wa-oab">
+                                <rect key="frame" x="73" y="72" width="507" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SC2-p6-Mit">
-                                <rect key="frame" x="73" y="66" width="507" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SC2-p6-Mit">
+                                <rect key="frame" x="73" y="110" width="461" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJJ-n7-YXa">
-                                <rect key="frame" x="20" y="28" width="45" height="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Info" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAY-ws-hDJ">
+                                <rect key="frame" x="20" y="108" width="45" height="26"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Info" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IAY-ws-hDJ">
-                                <rect key="frame" x="20" y="60" width="45" height="30.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDH-n8-nP5">
+                                <rect key="frame" x="20" y="148" width="560" height="444"/>
+                                <animations/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ky-I2-zet">
+                                <rect key="frame" x="542" y="110" width="38" height="30"/>
+                                <animations/>
+                                <state key="normal" image="Camera"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="yYC-0X-yGw" eventType="touchUpInside" id="pEP-7H-mLJ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Name" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJJ-n7-YXa">
+                                <rect key="frame" x="20" y="72" width="45" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -49,19 +61,34 @@
                         <constraints>
                             <constraint firstItem="nYc-Wa-oab" firstAttribute="leading" secondItem="VJJ-n7-YXa" secondAttribute="trailing" constant="8" symbolic="YES" id="8Bd-oH-BOJ"/>
                             <constraint firstItem="SC2-p6-Mit" firstAttribute="leading" secondItem="nYc-Wa-oab" secondAttribute="leading" id="8Nz-5u-qGC"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="pDH-n8-nP5" secondAttribute="leading" id="Ccy-dd-bqH"/>
                             <constraint firstItem="VJJ-n7-YXa" firstAttribute="baseline" secondItem="nYc-Wa-oab" secondAttribute="baseline" id="FXC-9I-IiG"/>
                             <constraint firstItem="VJJ-n7-YXa" firstAttribute="top" secondItem="V3C-6b-a0y" secondAttribute="bottom" constant="8" symbolic="YES" id="IHD-3t-xBU"/>
                             <constraint firstItem="IAY-ws-hDJ" firstAttribute="leading" secondItem="lIa-3m-1Ar" secondAttribute="leadingMargin" id="IWl-sn-TR7"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9ky-I2-zet" secondAttribute="trailing" id="KNX-Bh-mUu"/>
                             <constraint firstItem="V3G-jh-azI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="SC2-p6-Mit" secondAttribute="bottom" constant="8" symbolic="YES" id="Nzy-K9-EJ7"/>
                             <constraint firstItem="nYc-Wa-oab" firstAttribute="top" secondItem="V3C-6b-a0y" secondAttribute="bottom" constant="8" symbolic="YES" id="OBH-Td-GcZ"/>
                             <constraint firstItem="IAY-ws-hDJ" firstAttribute="top" secondItem="VJJ-n7-YXa" secondAttribute="bottom" constant="8" symbolic="YES" id="OdV-u0-4zs"/>
                             <constraint firstItem="SC2-p6-Mit" firstAttribute="leading" secondItem="IAY-ws-hDJ" secondAttribute="trailing" constant="8" symbolic="YES" id="Qg2-Py-M1J"/>
                             <constraint firstItem="IAY-ws-hDJ" firstAttribute="baseline" secondItem="SC2-p6-Mit" secondAttribute="baseline" id="Sj8-Sj-d5U"/>
+                            <constraint firstItem="9ky-I2-zet" firstAttribute="centerY" secondItem="SC2-p6-Mit" secondAttribute="centerY" id="eq8-hF-c7a"/>
+                            <constraint firstItem="9ky-I2-zet" firstAttribute="leading" secondItem="SC2-p6-Mit" secondAttribute="trailing" constant="8" symbolic="YES" id="fun-Y0-OcJ"/>
+                            <constraint firstItem="pDH-n8-nP5" firstAttribute="top" secondItem="SC2-p6-Mit" secondAttribute="bottom" constant="8" symbolic="YES" id="gpk-fu-biu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SC2-p6-Mit" secondAttribute="trailing" id="khA-Th-sRS"/>
                             <constraint firstItem="SC2-p6-Mit" firstAttribute="top" secondItem="nYc-Wa-oab" secondAttribute="bottom" constant="8" symbolic="YES" id="mi4-7T-mM2"/>
+                            <constraint firstItem="9ky-I2-zet" firstAttribute="top" secondItem="nYc-Wa-oab" secondAttribute="bottom" constant="8" symbolic="YES" id="nQl-HO-7E3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nYc-Wa-oab" secondAttribute="trailing" id="qlR-jf-U2p"/>
                             <constraint firstItem="VJJ-n7-YXa" firstAttribute="leading" secondItem="lIa-3m-1Ar" secondAttribute="leadingMargin" id="sis-lh-FYR"/>
+                            <constraint firstItem="pDH-n8-nP5" firstAttribute="top" secondItem="9ky-I2-zet" secondAttribute="bottom" constant="8" symbolic="YES" id="tF2-YB-U3p"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="pDH-n8-nP5" secondAttribute="trailing" id="uFv-SN-IzL"/>
+                            <constraint firstItem="V3G-jh-azI" firstAttribute="top" secondItem="pDH-n8-nP5" secondAttribute="bottom" constant="8" symbolic="YES" id="vMQ-UU-bFd"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="khA-Th-sRS"/>
+                                <exclude reference="Nzy-K9-EJ7"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Edit Waypoint" id="MOZ-tK-rKG">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="HWV-og-aEA">
@@ -71,6 +98,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="imageViewContainer" destination="pDH-n8-nP5" id="kPM-M9-TnA"/>
                         <outlet property="infoTextField" destination="SC2-p6-Mit" id="ubV-hr-jz1"/>
                         <outlet property="nameTextField" destination="nYc-Wa-oab" id="uG7-JB-dIr"/>
                     </connections>
@@ -222,6 +250,9 @@
             <point key="canvasLocation" x="1192" y="-345"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Camera" width="38" height="30"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="NCx-PQ-Hb1"/>
     </inferredMetricsTieBreakers>

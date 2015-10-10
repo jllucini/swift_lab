@@ -145,8 +145,13 @@ class GPXViewController: UIViewController, MKMapViewDelegate, UIPopoverPresentat
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
         if let waypoint = view.annotation as? GPX.Waypoint {
-            if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton {
-                if let url = waypoint.thumbnailURL {
+            if let url = waypoint.thumbnailURL {
+                // Check incase it is an editable waypoint
+                // Then there is no leftCallouAccessory by default
+                if view.leftCalloutAccessoryView == nil {
+                    view.leftCalloutAccessoryView = UIButton(frame: Constants.LeftCalloutFrame)
+                }
+                if let thumbnailImageButton = view.leftCalloutAccessoryView as? UIButton {
                     let qos = Int(QOS_CLASS_USER_INTERACTIVE.rawValue)
                     dispatch_async(dispatch_get_global_queue(qos, 0)) {
                         // Fetch the image async

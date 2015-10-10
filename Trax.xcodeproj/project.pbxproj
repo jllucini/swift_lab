@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8881D06F1BC1B15200787DDA /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8881D06E1BC1B15200787DDA /* ImageViewController.swift */; };
 		88A7B0BB1BC4578300583992 /* EditWaypointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7B0BA1BC4578300583992 /* EditWaypointViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		88A7B0BD1BC9A6C000583992 /* WaypointImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7B0BC1BC9A6C000583992 /* WaypointImageViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		88A7B0BF1BC9B13E00583992 /* SimpleMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88A7B0BE1BC9B13E00583992 /* SimpleMapViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		88E5A77B1BC03CC400B5C911 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5A77A1BC03CC400B5C911 /* AppDelegate.swift */; };
 		88E5A77D1BC03CC400B5C911 /* GPXViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E5A77C1BC03CC400B5C911 /* GPXViewController.swift */; };
 		88E5A7801BC03CC400B5C911 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E5A77E1BC03CC400B5C911 /* Main.storyboard */; };
@@ -32,6 +34,8 @@
 /* Begin PBXFileReference section */
 		8881D06E1BC1B15200787DDA /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		88A7B0BA1BC4578300583992 /* EditWaypointViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditWaypointViewController.swift; path = ../EditWaypointViewController.swift; sourceTree = "<group>"; };
+		88A7B0BC1BC9A6C000583992 /* WaypointImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WaypointImageViewController.swift; path = ../WaypointImageViewController.swift; sourceTree = "<group>"; };
+		88A7B0BE1BC9B13E00583992 /* SimpleMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleMapViewController.swift; sourceTree = "<group>"; };
 		88E5A7751BC03CC400B5C911 /* Trax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E5A7791BC03CC400B5C911 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88E5A77A1BC03CC400B5C911 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,11 +89,13 @@
 		88E5A7771BC03CC400B5C911 /* Trax */ = {
 			isa = PBXGroup;
 			children = (
+				88A7B0BC1BC9A6C000583992 /* WaypointImageViewController.swift */,
 				88A7B0BA1BC4578300583992 /* EditWaypointViewController.swift */,
 				88E5A77A1BC03CC400B5C911 /* AppDelegate.swift */,
 				88E5A77C1BC03CC400B5C911 /* GPXViewController.swift */,
 				88E5A79C1BC0570F00B5C911 /* MKGPX.swift */,
 				88E5A77E1BC03CC400B5C911 /* Main.storyboard */,
+				88A7B0BE1BC9B13E00583992 /* SimpleMapViewController.swift */,
 				88E5A7781BC03CC400B5C911 /* Supporting Files */,
 			);
 			path = Trax;
@@ -227,11 +233,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				88E5A77D1BC03CC400B5C911 /* GPXViewController.swift in Sources */,
+				88A7B0BD1BC9A6C000583992 /* WaypointImageViewController.swift in Sources */,
 				88E5A79D1BC0570F00B5C911 /* MKGPX.swift in Sources */,
 				88A7B0BB1BC4578300583992 /* EditWaypointViewController.swift in Sources */,
 				8881D06F1BC1B15200787DDA /* ImageViewController.swift in Sources */,
 				88E5A77B1BC03CC400B5C911 /* AppDelegate.swift in Sources */,
 				88E5A79B1BC0491400B5C911 /* GPX.swift in Sources */,
+				88A7B0BF1BC9B13E00583992 /* SimpleMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

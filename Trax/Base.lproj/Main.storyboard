@@ -155,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="1192" y="337"/>
         </scene>
-        <!--Image View Controller-->
+        <!--Waypoint Image View Controller-->
         <scene sceneID="1vm-eK-Aeb">
             <objects>
-                <viewController id="eKa-hs-QKd" customClass="ImageViewController" customModule="Trax" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eKa-hs-QKd" customClass="WaypointImageViewController" customModule="Trax" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EsS-sP-pQP"/>
                         <viewControllerLayoutGuide type="bottom" id="KRh-9P-0yJ"/>
@@ -167,8 +167,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQd-ik-VY3">
-                                <rect key="frame" x="20" y="20" width="560" height="572"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQd-ik-VY3">
+                                <rect key="frame" x="20" y="14" width="560" height="572"/>
                                 <subviews>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MrP-2d-uZV">
                                         <rect key="frame" x="270" y="276" width="20" height="20"/>
@@ -191,11 +191,24 @@
                                     </mask>
                                 </variation>
                             </scrollView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NEd-Q0-58h">
+                                <rect key="frame" x="380" y="392" width="200" height="200"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="8MP-NP-7Tr"/>
+                                    <constraint firstAttribute="height" constant="200" id="8ud-NT-fM6"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="0k8-ca-mUn" kind="embed" identifier="Embed Map" id="Sf1-TY-3Fe"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="NEd-Q0-58h" secondAttribute="trailing" id="6Ts-Cr-0yh"/>
                             <constraint firstItem="KRh-9P-0yJ" firstAttribute="top" secondItem="TQd-ik-VY3" secondAttribute="bottom" constant="8" symbolic="YES" id="8xB-ST-0Rs"/>
+                            <constraint firstItem="KRh-9P-0yJ" firstAttribute="top" secondItem="NEd-Q0-58h" secondAttribute="bottom" constant="8" symbolic="YES" id="9cI-lp-dA1"/>
                             <constraint firstAttribute="trailing" secondItem="TQd-ik-VY3" secondAttribute="trailing" constant="20" symbolic="YES" id="CO1-qL-Lbp"/>
                             <constraint firstItem="TQd-ik-VY3" firstAttribute="leading" secondItem="TTf-2W-nZx" secondAttribute="leading" constant="20" symbolic="YES" id="k5G-hK-c4S"/>
                             <constraint firstItem="TQd-ik-VY3" firstAttribute="top" secondItem="TTf-2W-nZx" secondAttribute="top" constant="20" symbolic="YES" id="xp1-kl-FeK"/>
@@ -248,6 +261,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7W0-LL-3g6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1192" y="-345"/>
+        </scene>
+        <!--Simple Map View Controller-->
+        <scene sceneID="n1x-dV-Zww">
+            <objects>
+                <viewController id="0k8-ca-mUn" customClass="SimpleMapViewController" customModule="Trax" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" ambiguous="YES" id="thf-Bd-Lny">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="8Br-rK-r7u">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <animations/>
+                            </mapView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="8Br-rK-r7u" id="rWa-vS-dzn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vqf-tM-XeE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2428" y="537"/>
         </scene>
     </scenes>
     <resources>
